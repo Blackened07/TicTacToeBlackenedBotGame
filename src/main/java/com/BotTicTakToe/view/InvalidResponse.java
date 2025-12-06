@@ -9,7 +9,7 @@ public class InvalidResponse implements CreateView<GameSession> {
 
     @Override
     public String getViewName() {
-        return ViewNames.INVALID.getName();
+        return ViewNameKey.INVALID.getName();
     }
 
     @Override

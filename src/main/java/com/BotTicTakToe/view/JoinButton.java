@@ -1,5 +1,6 @@
 package com.BotTicTakToe.view;
 
+import com.BotTicTakToe.controller.Command;
 import com.BotTicTakToe.model.GameSession;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -13,14 +14,14 @@ public class JoinButton implements CreateView<GameSession> {
 
     @Override
     public String getViewName() {
-        return ViewNames.JOIN_BUTTON.getName();
+        return ViewNameKey.JOIN_BUTTON.getName();
     }
 
     @Override
     public SendMessage createView(long sessionId, GameSession data) {
 
         List<InlineKeyboardButton> joinButton = List.of(
-                getButton("Присоединиться к игре", "Join")
+                getButton("Присоединиться к игре", Command.JOIN.getData())
         );
 
         List<InlineKeyboardRow> keyboardRows = List.of(

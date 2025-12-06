@@ -26,10 +26,6 @@ public class ViewService {
         return view.createView(sessionId, data);
     }
 
-    public Map<String, CreateView<?>> getViews() {
-        return views;
-    }
-
     public SendMessage setResponseMessage(Long chatId, String botText) {
         return SendMessage.builder()
                 .text(botText)

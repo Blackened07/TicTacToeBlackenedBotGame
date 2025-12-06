@@ -4,35 +4,29 @@ import com.BotTicTakToe.controller.Command;
 import com.BotTicTakToe.controller.CommandHandler;
 import com.BotTicTakToe.service.SessionService;
 import com.BotTicTakToe.service.ViewService;
-import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import static com.BotTicTakToe.view.ViewNameKey.INVALID;
+public class JoinHandler extends BaseCommandHandler implements CommandHandler {
 
-@Component
-public class InvalidHandler extends BaseCommandHandler implements CommandHandler {
-
-    public InvalidHandler(SessionService sessionService, TelegramClient telegramClient, ViewService viewService) {
+    public JoinHandler(SessionService sessionService, TelegramClient telegramClient, ViewService viewService) {
         super(sessionService, telegramClient, viewService);
     }
 
-
     @Override
     public boolean canHandle(Update update) {
-        return update.hasMessage() && !update.getMessage().getText().equals(Command.START.getData()) ;
+        return update.hasCallbackQuery() && update.getMessage().getText().equals(Command.JOIN.getData());
     }
 
     @Override
     public void handle(Update update, TelegramClient telegramClient) {
-        long sessionId = update.getMessage().getChatId();
 
-        sendResponse(viewService.createView(INVALID.getName(), sessionId, sessionService.getSessions(sessionId)));
     }
 
     @Override
     protected void sendResponse(SendMessage message) {
         super.sendResponse(message);
     }
+
 }

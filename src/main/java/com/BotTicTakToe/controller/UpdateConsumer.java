@@ -7,15 +7,10 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.List;
-
-import static com.BotTicTakToe.view.ViewNames.INVALID;
-import static com.BotTicTakToe.view.ViewNames.JOIN_BUTTON;
 
 @Component
 public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, SpringLongPollingBot {
@@ -43,7 +38,6 @@ public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, Sp
 
     @Override
     public void consume(Update update) {
-        //Переносим логику в классы, доступ к классам через commandHandlers
         for (CommandHandler handler : commandHandlers) {
             if (handler.canHandle(update)) {
                 handler.handle(update, telegramClient);

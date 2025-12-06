@@ -1,15 +1,16 @@
 package com.BotTicTakToe.controller;
 
 public enum Command {
-    START("/start");
+    START("/start"),
+    JOIN("/join");
 
-    private final String name;
+    private final String data;
 
-    Command(String name) {
-        this.name = name;
+    Command(String data) {
+        this.data = data;
     }
 
-    public String getName() {
-        return name;
+    public String getData() {
+        return data;
     }
 }

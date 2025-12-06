@@ -1,12 +1,12 @@
 package com.BotTicTakToe.view;
 
-public enum ViewNames {
+public enum ViewNameKey {
     JOIN_BUTTON("JoinButton"),
     INVALID("Invalid"),;
 
     private final String name;
 
-    ViewNames(String name) {
+    ViewNameKey(String name) {
         this.name = name;
     }
 
