@@ -1,7 +1,7 @@
 package com.BotTicTakToe.controller.commandHandlers;
 
 import com.BotTicTakToe.controller.CommandHandler;
-import com.BotTicTakToe.service.SessionService;
+import com.BotTicTakToe.service.SessionManager;
 import com.BotTicTakToe.service.ViewService;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -9,15 +9,15 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 public abstract class BaseCommandHandler implements CommandHandler {
 
-    final SessionService sessionService;
+    final SessionManager sessionManager;
     final TelegramClient telegramClient;
     final ViewService viewService;
 
     public BaseCommandHandler(
-            SessionService sessionService,
+            SessionManager sessionManager,
             TelegramClient telegramClient,
             ViewService viewService) {
-        this.sessionService = sessionService;
+        this.sessionManager = sessionManager;
         this.telegramClient = telegramClient;
         this.viewService = viewService;
     }

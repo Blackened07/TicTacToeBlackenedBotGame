@@ -1,7 +1,5 @@
 package com.BotTicTakToe.controller;
 
-import com.BotTicTakToe.service.SessionService;
-import com.BotTicTakToe.service.ViewService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
@@ -16,22 +14,15 @@ import java.util.List;
 public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, SpringLongPollingBot {
 
     private final TelegramClient telegramClient;
-    private final SessionService sessionService;
-    private final ViewService viewService;
     private final String BOT_TOKEN;
 
     private final List<CommandHandler> commandHandlers;
 
     public UpdateConsumer(
             TelegramClient telegramClient,
-            SessionService sessionService,
-            ViewService viewService,
             @Value("${tg.token}") String botToken,
-            List<CommandHandler> commandHandlers)
-    {
+            List<CommandHandler> commandHandlers) {
         this.telegramClient = telegramClient;
-        this.sessionService = sessionService;
-        this.viewService = viewService;
         this.BOT_TOKEN = botToken;
         this.commandHandlers = commandHandlers;
     }

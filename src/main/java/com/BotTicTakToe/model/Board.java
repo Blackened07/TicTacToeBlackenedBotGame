@@ -11,7 +11,6 @@ public class Board {
         this.board = new Cell[WIDTH][HEIGHT];
         fillByCells();
     }
-
     //for print and check
     public Cell[][] getBoard() {
         return board;

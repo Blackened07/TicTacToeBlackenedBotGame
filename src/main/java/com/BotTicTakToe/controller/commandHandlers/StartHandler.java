@@ -3,7 +3,7 @@ package com.BotTicTakToe.controller.commandHandlers;
 import com.BotTicTakToe.controller.Command;
 import com.BotTicTakToe.controller.CommandHandler;
 import com.BotTicTakToe.model.GameSession;
-import com.BotTicTakToe.service.SessionService;
+import com.BotTicTakToe.service.SessionManager;
 import com.BotTicTakToe.service.ViewService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,9 +15,8 @@ import static com.BotTicTakToe.view.ViewNameKey.JOIN_BUTTON;
 @Component
 public class StartHandler extends BaseCommandHandler implements CommandHandler {
 
-
-    public StartHandler(SessionService sessionService, TelegramClient telegramClient, ViewService viewService) {
-        super(sessionService, telegramClient, viewService);
+    public StartHandler(SessionManager sessionManager, TelegramClient telegramClient, ViewService viewService) {
+        super(sessionManager, telegramClient, viewService);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class StartHandler extends BaseCommandHandler implements CommandHandler {
         long sessionId = update.getMessage().getChatId();
         long playerId = update.getMessage().getFrom().getId();
 
-        GameSession gameSession = sessionService.createGame(sessionId, playerId);
+        GameSession gameSession = sessionManager.createGame(sessionId, playerId);
         SendMessage message = viewService.createView(JOIN_BUTTON.getName(), sessionId, gameSession);
         sendResponse(message);
     }
