@@ -12,6 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
+import java.util.List;
+
+import static com.BotTicTakToe.view.ViewNames.INVALID;
 import static com.BotTicTakToe.view.ViewNames.JOIN_BUTTON;
 
 @Component
@@ -22,45 +25,30 @@ public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, Sp
     private final ViewService viewService;
     private final String BOT_TOKEN;
 
+    private final List<CommandHandler> commandHandlers;
+
     public UpdateConsumer(
             TelegramClient telegramClient,
             SessionService sessionService,
             ViewService viewService,
-            @Value("${tg.token}") String botToken) {
+            @Value("${tg.token}") String botToken,
+            List<CommandHandler> commandHandlers)
+    {
         this.telegramClient = telegramClient;
         this.sessionService = sessionService;
         this.viewService = viewService;
         this.BOT_TOKEN = botToken;
+        this.commandHandlers = commandHandlers;
     }
 
     @Override
     public void consume(Update update) {
-
-        if (update.hasMessage()) {
-            long sessionId = update.getMessage().getChatId();
-            long playerId = update.getMessage().getFrom().getId();
-
-            if(update.getMessage().getText().equals("/start")) {
-                sessionService.createGame(sessionId, playerId);
-                SendMessage message = viewService.createView(JOIN_BUTTON.getName(), sessionId, sessionService.getSessions(sessionId));
-                sendResponse(message);
-            } else {
-                SendMessage message = viewService.setResponseMessage(update.getMessage().getChatId(), "Что?");
-                sendResponse(message);
+        //Переносим логику в классы, доступ к классам через commandHandlers
+        for (CommandHandler handler : commandHandlers) {
+            if (handler.canHandle(update)) {
+                handler.handle(update, telegramClient);
+                return;
             }
-        } else if (update.hasCallbackQuery()) {
-            long sessionId = update.getCallbackQuery().getMessage().getChatId();
-            long playerId = update.getCallbackQuery().getFrom().getId();
-            String data = update.getCallbackQuery().getData();
-
-        }
-    }
-
-    private void sendResponse(SendMessage message) {
-        try {
-            telegramClient.execute(message);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
         }
     }
 

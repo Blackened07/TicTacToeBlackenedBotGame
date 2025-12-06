@@ -1,7 +1,8 @@
 package com.BotTicTakToe.view;
 
 public enum ViewNames {
-    JOIN_BUTTON("JoinButton");
+    JOIN_BUTTON("JoinButton"),
+    INVALID("Invalid"),;
 
     private final String name;
 

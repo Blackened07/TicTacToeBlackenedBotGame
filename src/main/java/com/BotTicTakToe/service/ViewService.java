@@ -4,7 +4,6 @@ import com.BotTicTakToe.view.CreateView;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,6 +24,10 @@ public class ViewService {
             throw new IllegalArgumentException(viewName + " not found");
         }
         return view.createView(sessionId, data);
+    }
+
+    public Map<String, CreateView<?>> getViews() {
+        return views;
     }
 
     public SendMessage setResponseMessage(Long chatId, String botText) {

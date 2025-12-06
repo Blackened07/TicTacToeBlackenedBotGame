@@ -24,7 +24,7 @@ public class JoinButton implements CreateView<GameSession> {
         );
 
         List<InlineKeyboardRow> keyboardRows = List.of(
-                new InlineKeyboardRow(joinButton.get(0))
+                new InlineKeyboardRow(joinButton.getFirst())
         );
 
         String textButt = "Пользователь: " + data.getFirstPlayer().getId() + " создал игру!";
