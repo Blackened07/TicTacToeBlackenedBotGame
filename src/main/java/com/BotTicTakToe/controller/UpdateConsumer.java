@@ -4,6 +4,8 @@ import com.BotTicTakToe.service.SessionService;
 import com.BotTicTakToe.service.ViewService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
+import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,7 +15,7 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 import static com.BotTicTakToe.view.ViewNames.JOIN_BUTTON;
 
 @Component
-public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer {
+public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, SpringLongPollingBot {
 
     private final TelegramClient telegramClient;
     private final SessionService sessionService;
@@ -60,5 +62,15 @@ public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer {
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String getBotToken() {
+        return BOT_TOKEN;
+    }
+
+    @Override
+    public LongPollingUpdateConsumer getUpdatesConsumer() {
+        return this;
     }
 }
