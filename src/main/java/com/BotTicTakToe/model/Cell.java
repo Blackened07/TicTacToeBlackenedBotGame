@@ -7,9 +7,9 @@ public class Cell {
     private Occupant occupant;
 
     public Cell(int x, int y) {
-
         this.x = x;
         this.y = y;
+        this.occupant = new Occupant("");
     }
 
     public Occupant getOccupant() {
@@ -21,6 +21,6 @@ public class Cell {
     }
 
     public boolean isOccupied() {
-        return occupant != null;
+        return !occupant.getSymbol().isEmpty();
     }
 }

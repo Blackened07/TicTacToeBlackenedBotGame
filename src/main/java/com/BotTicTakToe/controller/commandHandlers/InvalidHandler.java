@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import static com.BotTicTakToe.view.ViewNameKey.INVALID;
+import static com.BotTicTakToe.view.ViewNameKey.BOT_MESSAGE;
 
 @Component
 public class InvalidHandler extends BaseCommandHandler implements CommandHandler {
@@ -26,7 +26,7 @@ public class InvalidHandler extends BaseCommandHandler implements CommandHandler
     public void handle(Update update, TelegramClient telegramClient) {
         long sessionId = update.getMessage().getChatId();
 
-        sendResponse(viewService.createView(INVALID.getName(), sessionId, sessionManager.getSessions(sessionId)));
+        sendResponse(viewService.createView(BOT_MESSAGE.getName(), sessionId, sessionManager.getSessions(sessionId)));
     }
 
     @Override

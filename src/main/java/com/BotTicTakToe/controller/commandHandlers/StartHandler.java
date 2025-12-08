@@ -1,6 +1,6 @@
 package com.BotTicTakToe.controller.commandHandlers;
 
-import com.BotTicTakToe.controller.Command;
+import com.BotTicTakToe.controller.CallBackData;
 import com.BotTicTakToe.controller.CommandHandler;
 import com.BotTicTakToe.model.GameSession;
 import com.BotTicTakToe.service.SessionManager;
@@ -21,16 +21,17 @@ public class StartHandler extends BaseCommandHandler implements CommandHandler {
 
     @Override
     public boolean canHandle(Update update) {
-        return update.hasMessage() && update.getMessage().getText().equals(Command.START.getData());
+        return update.hasMessage() && CallBackData.START.getData().equals(update.getMessage().getText());
     }
 
     @Override
     public void handle(Update update, TelegramClient telegramClient) {
+        var updateMessage = update.getMessage();
+        long sessionId = updateMessage.getChatId();
+        long playerId = updateMessage.getFrom().getId();
+        String name = updateMessage.getFrom().getFirstName();
 
-        long sessionId = update.getMessage().getChatId();
-        long playerId = update.getMessage().getFrom().getId();
-
-        GameSession gameSession = sessionManager.createGame(sessionId, playerId);
+        GameSession gameSession = sessionManager.createGame(sessionId, playerId, name);
         SendMessage message = viewService.createView(JOIN_BUTTON.getName(), sessionId, gameSession);
         sendResponse(message);
     }

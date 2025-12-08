@@ -1,6 +1,6 @@
 package com.BotTicTakToe.view;
 
-import com.BotTicTakToe.controller.Command;
+import com.BotTicTakToe.controller.CallBackData;
 import com.BotTicTakToe.model.GameSession;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 
 import java.util.List;
+
 @Component
 public class JoinButton implements CreateView<GameSession> {
 
@@ -21,14 +22,14 @@ public class JoinButton implements CreateView<GameSession> {
     public SendMessage createView(long sessionId, GameSession data) {
 
         List<InlineKeyboardButton> joinButton = List.of(
-                getButton("Присоединиться к игре", Command.JOIN.getData())
+                getButton("Присоединиться к игре", CallBackData.JOIN.getData())
         );
 
         List<InlineKeyboardRow> keyboardRows = List.of(
                 new InlineKeyboardRow(joinButton.getFirst())
         );
-
-        String textButt = "Пользователь: " + data.getFirstPlayer().getId() + " создал игру!";
+        //check last letter. if a e or else - its woman
+        String textButt = String.format("Пользователь: %s создал игру!", data.getFirstPlayer().getName());
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup(keyboardRows);
 

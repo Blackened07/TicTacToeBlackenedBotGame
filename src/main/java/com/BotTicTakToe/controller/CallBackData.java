@@ -1,12 +1,13 @@
 package com.BotTicTakToe.controller;
 
-public enum Command {
+public enum CallBackData {
     START("/start"),
-    JOIN("/join");
+    JOIN("/join"),
+    MOVE("MOVE_");
 
     private final String data;
 
-    Command(String data) {
+    CallBackData(String data) {
         this.data = data;
     }
 

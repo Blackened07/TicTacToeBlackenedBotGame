@@ -11,21 +11,13 @@ public class Board {
         this.board = new Cell[WIDTH][HEIGHT];
         fillByCells();
     }
-    //for print and check
-    public Cell[][] getBoard() {
-        return board;
-    }
-    //for change state
+
     public Cell getCell(int x, int y) {
         if (isValidCoordinates(x, y)) {
             return board[x][y];
-        } else  {
+        } else {
             return null;
         }
-    }
-
-    public void setOccupant(int x, int y, Occupant occupant) {
-        board[x][y].setOccupant(occupant);
     }
 
     private boolean isValidCoordinates(int x, int y) {
@@ -39,5 +31,6 @@ public class Board {
             }
         }
     }
+
 
 }

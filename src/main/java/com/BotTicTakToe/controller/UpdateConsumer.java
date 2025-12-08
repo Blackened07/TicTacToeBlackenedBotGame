@@ -33,6 +33,8 @@ public class UpdateConsumer implements LongPollingSingleThreadUpdateConsumer, Sp
             if (handler.canHandle(update)) {
                 handler.handle(update, telegramClient);
                 return;
+            } else {
+                System.out.println("Nothing to do.");
             }
         }
     }

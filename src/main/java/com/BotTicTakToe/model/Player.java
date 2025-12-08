@@ -1,14 +1,18 @@
 package com.BotTicTakToe.model;
 
 public class Player {
-
+    private final String name;
     private final long id;
     private final String occupant;
-    private boolean turn;
 
-    public Player(long id, String occupant) {
+    public Player(long id, String occupant, String name) {
         this.id = id;
         this.occupant = occupant;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public long getId() {
@@ -19,11 +23,4 @@ public class Player {
         return occupant;
     }
 
-    public boolean getTurn() {
-        return turn;
-    }
-
-    public void setTurn(boolean turn) {
-        this.turn = turn;
-    }
 }
