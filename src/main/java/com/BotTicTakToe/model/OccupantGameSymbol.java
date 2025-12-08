@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum OccupantGameSymbol {
-    X("X"),
-    O("O");
+    X("❌"),
+    O("⭕");
 
     private final String symbol;
 
