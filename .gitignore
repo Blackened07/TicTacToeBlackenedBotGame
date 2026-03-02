@@ -3,7 +3,6 @@ target/
 mvnw
 mvnw.cmd
 src/test
-src/main/resources
 .idea
 .mvn
 !**/src/main/**/target/

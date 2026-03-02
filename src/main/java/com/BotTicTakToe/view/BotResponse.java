@@ -21,7 +21,7 @@ public class BotResponse implements CreateView<GameSession> {
 
         String message = "";
         if (currentState == GameState.CONNECTION_FAILURE) {
-            message = "Вы создали игру, как вы можете к ней присоединиться? ";
+            message = "Это многопользовательская игра! Вы не можете играть с самим собой, а я не запрограммирован играть с вами, извините и да хранит вас Господь! ";
         } else if (currentState == GameState.GAME_SESSION_NOT_EXISTS) {
             message = "Давай по новой Миша, всё хуйня";
         } else if (currentState == GameState.CONNECTION_SUCCESS) {
